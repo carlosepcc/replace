@@ -10,19 +10,141 @@
 <body>
     <script src="https://unpkg.com/vue@3"></script>
 
-<div id="app" class="app" v-text="rawText">{{ rawText }}</div>
+<div id="app" class="app">
+  <textarea
+  id="rawTextInput"
+        class="w100 card"
+        v-model="rawText"
+        rows="12"
+        cols="40"
+      ></textarea>
+      <button
+        title="Click to copy modified text"
+          @click="copyModText"
+          id="modTextContainer">
+          <pre v-html="modText"></pre>
+      </button>
+        
+    </div>
 
 <script>
   Vue.createApp({
     data() {
       return {
-        rawText: ''
+        rawText: `Martes, 26/04/2022
+   Desayuno
+Mayonesa elaborada (20 g )$ 0
+Pan 50 g (50 g )$ 0
+Mermelada de pulpa de mango (80 g )$ 0
+   Almuerzo
+Sopa de pollo (200 g )$ 0
+Arroz blanco (180 g )$ 0
+Pollo asado (100 g )$ 0
+Boniato hervido (90 g )$ 0
+   Comida
+Pan 50 g (50 g )$ 0
+Salchicha (2 u )$ 0
+Arroz blanco (180 g )$ 0
+Potaje de chícharo (200 g )$ 0
+Miércoles, 27/04/2022
+   Desayuno
+Refresco de mermelada de mango (232 ml )$ 0
+Mayonesa elaborada (20 g )$ 0
+Pan 50 g (50 g )$ 0
+   Almuerzo
+Pan 50 g (50 g )$ 0
+Arroz blanco (180 g )$ 0
+Huevo hervido. (1 u )$ 0
+Potaje de frijoles negros (200 g )$ 0
+   Comida
+Sopa de pollo (200 g )$ 0
+Vianda hervida (90 g )$ 0
+Arroz blanco (180 g )$ 0
+Picadillo (80 g )$ 0
+Jueves, 28/04/2022
+   Desayuno
+Refresco de mermelada de mango (232 ml )$ 0
+Mayonesa elaborada (20 g )$ 0
+Pan 50 g (50 g )$ 0
+   Almuerzo
+Pan 50 g (50 g )$ 0
+Arroz blanco (180 g )$ 0
+Huevo hervido. (1 u )$ 0
+Potaje de frijoles negros (200 g )$ 0
+   Comida
+Vianda hervida (90 g )$ 0
+Pollo asado (100 g )$ 0
+Arroz congris (230 g )$ 0`,
+        rules:[
+          {s:/\$ 0/g,r:''},
+          {s:/\./g,r:''},
+          {s:/\)/g,r:''},
+          {s:/\(/g,r:''},
+          {s:/2022/g,r:'2022**'},
+          {s:/Lunes/g,r:'\n**Lunes'},
+          {s:/Martes/g,r:'\n**Martes'},
+          {s:/Miércoles/g,r:'\n**Miércoles'},
+          {s:/Jueves/g,r:'\n**Jueves'},
+          {s:/Viernes/g,r:'\n**Viernes'},
+          {s:/Sábado/g,r:'\n**Sábado'},
+          {s:/Domingo/g,r:'\n**Domingo'},
+          {s:/ g /g,r:'g'},
+          {s:/Desayuno/g,r:'\nDESAYUNO'},
+          {s:/Almuerzo/g,r:'\nALMUERZO'},
+          {s:/Comida/g,r:'\nCENA'},
+          {s:/Vianda/g,r:'🥔   Vianda'},
+          {s:/Arroz/g,r:'🍚   Arroz'},
+          {s:/🍚   Arroz congris/g,r:'🍛   Arroz congris'},
+          {s:/Pan 50g/g,r:'Pan '},
+          {s:/Huevo/g,r:'🥚   **Huevo**'},
+          {s:/\*\*Huevo\*\* hervido/g,r:'**Huevo hervido**'},
+          {s:/🥚   \*\*Huevo\*\* frito/g,r:'🍳   **Huevo frito**'},
+          {s:/Pan/g,r:'🍔   Pan '},
+          {s:/Sopa/g,r:'🥣   Sopa'},
+          {s:/Potaje/g,r:'🥣   Potaje'},
+          {s:/Boniato/g,r:'🥔   Boniato'},
+          {s:/Picadillo/g,r:'🧆   **Picadillo**'},
+          {s:/\*\*Picadillo\*\* de masa de chorizo/g,r:'**Picadillo de masa de chorizo**'},
+          {s:/Pollo/g,r:'🍗   **Pollo**'},
+          {s:/\*\*Pollo\*\* asado/g,r:'**Pollo asado**'},
+          {s:/\*\*Pollo\*\* frito/g,r:'**Pollo frito**'},
+          {s:/Salchicha/g,r:'🌭   Salchicha'},
+          {s:/Mermelada/g,r:'🍯   Mermelada'},
+          {s:/Refresco/g,r:'🥃   Refresco'},
+          {s:/Calabaza/g,r:'🎃   Calabaza'},
+          {s:/Chorizo/g,r:'🥩️   Chorizo'},
+          {s:/Mayonesa/g,r:'🧈   Mayonesa'},
+          {s:/Plátano/g,r:'🍌   Plátano'},
+          {s:/Jamonada/g,r:'🥩️   **Jamonada**'},
+          
+      ],
       }
+    },
+  computed: {
+    modText() {
+      let modText = this.rawText;
+      modText = modText + "\n\nhttp://t.me/alimentacionuci";
+      this.rules.forEach(rule => {
+  modText = modText.replace(rule.s, rule.r);
+});
+
+
+      return modText;
+    }
+  },
+    methods: {
+      copyModText: function () {
+        if (this.modText){navigator.clipboard.writeText(this.modText);
+          alert("Copiado:\n\n" + this.modText);
+          return true;}else{
+            alert("No se encuentra texto que copiar.\nDetalles: El texto modificado que intenta copiar es: " + this.modText);
+          return false;}
+        },
     }
   }).mount('#app')
 </script>
 
-<a href="index-old.html">Old version</a>
+<a href="https://carlosepcc.github.io/vueapps/#alimentacion-app">Old version</a>
 </body>
 </html>
 

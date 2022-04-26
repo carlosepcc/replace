@@ -1,23 +1,14 @@
+*{box-sizing: border-box;}
 body {
     padding-bottom: 80%;
     background: linear-gradient(rgb(103, 214, 113), rgb(27, 209, 170));
 
   color: #333;
   }
-  .codearea{
-    border-radius: 4px;
-    font-weight: 700;
-    box-shadow: 2px 2px 8px 0 #0005 inset;
-    line-height: 1.5;
-    font-family: monospace;
-    overflow-x: auto;
-  padding: 16px;
-  background: #444;
-  color: #eee;}
   .card {
     box-shadow: 0 0 4px 0 #0002;
     padding: 16px;
-    margin: 4px;
+    margin: auto;
     border-radius: 4px;
   }
   .app {
@@ -41,36 +32,45 @@ body {
   .b0 {
     border: 0;
   }
+  #rawTextInput{
+    background: #fff;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    border: 3px solid rgb(206, 221, 221);
+    box-shadow: 1px 1px 8px 0 #0002 inset;
+  }
   #modTextContainer {
     padding: 32px;
-    background: linear-gradient(90deg, rgb(31, 85, 47), rgb(77, 192, 86));
-    color: #fffc;
+    width: 100%;
+    color: inherit;
     border-radius: 4px;
-    box-shadow: -1px 1px 8px 0 #0005;
+    border-top: 8px solid #999;
+    border: 0;
     text-align: start;
+    overflow: auto;
+    background: #0501;
+    box-shadow: -2px 2px 0 0 #0702;
+    transition: .2s all;
   }
-  #modTextContainer {
+  #modTextContainer:hover{
+    background: #fff;
+    border: 3px solid teal;
+    cursor: pointer;
+    box-shadow: -6px 6px 0 0 teal;
+    transform: translate(3px,-3px);
   }
+  #modTextContainer:active{
+    background: #0002;
+    cursor: pointer;
+    box-shadow: -1px 1px 0 0 #0702;
+    transform: translate(-1px,1px);
+  }
+  #modTextContainer pre{
+    font-family: sans-serif;}
   .app-title {
     color: #fffe;
     margin-left: 1em;
     background: #0006;
     padding: 8px 24px;
     border-radius: 8px 8px 0 0;
-  }
-button,input[type=button]{
-  
-  transition: .2s;
-  padding: 8px 16px;width: 100%;text-transform: uppercase;margin-bottom: 6px;
-  border: none;
-  box-shadow: 0 2px 0 0 #0003;
-  border-radius: 4px;
-  }
-  button:hover,input[type=button]:hover{
-  background: #ddd;
-  }
-  button:active,input[type=button]:active{
-  background: #eee;
-  transform: translateY(1px);
-  box-shadow: 0 1px 0 0 #0003;
   }

@@ -99,7 +99,7 @@ Picadillo (80 g )$ 0`,
 
           modText = "**" + modText;
           modText = modText.replace(new Date().getFullYear, new Date().getFullYear+"**");
-rules.forEach(rule => {
+this.rules.forEach(rule => {
   modText = modText.replace(rule.string, rule.rstring);
 });
           // modText = modText.replace(/Desayuno/g, "\nDESAYUNO");
@@ -129,9 +129,6 @@ rules.forEach(rule => {
           //   "🍈   Dulce de frutabomba"
           // );
           // modText = modText.replace(/Pan 50 g/g, "Pan");
-          // modText = modText.replace(/\)/g, "");
-          // modText = modText.replace(/\(/g, "  ");
-          // modText = modText.replace(/ g/g, "g");
           // modText = modText.replace(/Mayonesa/g, "🧈   Mayonesa");
           // modText = modText.replace(
           //   /Mermelada de pulpa de mango/g,
