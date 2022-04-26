@@ -123,12 +123,12 @@ Arroz congris (230 g )$ 0`,
   computed: {
     modText() {
       let modText = this.rawText;
-      modText = modText + "\n\nhttp://t.me/alimentacionuci";
       this.rules.forEach(rule => {
   modText = modText.replace(rule.s, rule.r);
 });
 
 
+modText = modText + "\n\nhttp://t.me/alimentacionuci";
       return modText;
     }
   },
