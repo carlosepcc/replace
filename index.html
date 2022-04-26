@@ -1,0 +1,100 @@
+<span class="app-title">alimentacion-app</span>
+    <div class="app" id="alimentacion-app">
+      <textarea
+        class="w100 p b0"
+        v-model="rawText"
+        rows="12"
+        cols="40"
+      ></textarea>
+      <button class="w100">
+        🗐
+        <pre
+          @click="copyModText"
+          v-html="modText"
+          id="modTextContainer"
+          class="w100"
+        ></pre>
+      </button>
+    </div>
+<script>
+    var app = new Vue({
+      el: "#alimentacion-app",
+      data: {
+        rawText: `Lunes, 29/11/2021
+   Desayuno
+Refresco de mermelada de mango (232 ml )$ 0
+Mayonesa elaborada (20 g )$ 0
+Pan 50 g (50 g )$ 0
+   Almuerzo
+Dulce de frutabomba (80 g )$ 0
+Arroz blanco (180 g )$ 0
+Huevo hervido. (1 u )$ 0
+Potaje de chícharo (200 g )$ 0
+Boniato hervido (90 g )$ 0
+   Comida
+Pan 50 g (50 g )$ 0
+Mermelada de pulpa de mango (80 g )$ 0
+Arroz blanco (180 g )$ 0
+Potaje de chícharo (200 g )$ 0
+Picadillo (80 g )$ 0`,
+      },
+      methods: {
+        copyModText: function () {
+          navigator.clipboard.writeText(this.modText);
+          alert("Copiado:\n\n" + this.modText);
+          return true;
+        },
+        pasteText: function () {
+          this.rawText = navigator.clipboard.readText();
+          alert("Copiado:\n\n" + this.modText);
+          return true;
+        },
+      },
+      computed: {
+        modText: function () {
+          let modText = this.rawText;
+
+          modText = "**" + modText;
+          modText = modText.replace("2021", "2021**");
+
+          modText = modText.replace(/Desayuno/g, "\nDESAYUNO");
+          modText = modText.replace(/Almuerzo/g, "\nALMUERZO");
+          modText = modText.replace(/Comida/g, "\nCOMIDA");
+          modText = modText.replace(/\$ 0/g, "");
+          modText = modText.replace(/Vianda/g, "🥔   Vianda");
+          modText = modText.replace(/Arroz blanco/g, "🍚   Arroz blanco");
+          modText = modText.replace(/Pan/g, "🍔   Pan");
+          modText = modText.replace(/Palitroque/g, "🥖   Palitroque");
+          modText = modText.replace(
+            /Refresco/g,
+            "🥃   Refresco"
+          );
+          modText = modText.replace(/Huevo hervido/g, "🥚   Huevo hervido");
+          modText = modText.replace(/Sopa o potaje/g, "🥣   Sopa o potaje");
+          modText = modText.replace(/Salchicha/g, "🌭   Salchicha");
+          modText = modText.replace(/\./g, "");
+          modText = modText.replace(/'/g, "");
+          modText = modText.replace(
+            /Potaje de chícharo/g,
+            "🥘   Potaje de chícharo"
+          );
+          modText = modText.replace(/Boniato hervido/g, "🥔   Boniato hervido");
+          modText = modText.replace(
+            /Dulce de frutabomba/g,
+            "🍈   Dulce de frutabomba"
+          );
+          modText = modText.replace(/Pan 50 g/g, "Pan");
+          modText = modText.replace(/\)/g, "");
+          modText = modText.replace(/\(/g, "  ");
+          modText = modText.replace(/ g/g, "g");
+          modText = modText.replace(/Mayonesa/g, "🧈   Mayonesa");
+          modText = modText.replace(
+            /Mermelada de pulpa de mango/g,
+            "🥭   Mermelada de pulpa de mango"
+          );
+          modText = modText.replace(/Picadillo/g, "🧆   Picadillo");
+          modText = modText.replace(/Pollo/g, "🍗   Pollo");
+          return modText;
+        },
+      },
+    });
