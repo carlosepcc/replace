@@ -39,9 +39,6 @@
     var app = new Vue({
       el: "#alimentacion-app",
       data: {
-        rules:[
-          {string:'/Desayuno/g',rstring:'\nDESAYUNO'}
-      ],
         rawText: `Lunes, 29/11/2021
    Desayuno
 Refresco de mermelada de mango (232 ml )$ 0
@@ -60,6 +57,19 @@ Arroz blanco (180 g )$ 0
 Potaje de chícharo (200 g )$ 0
 Picadillo (80 g )$ 0`,
       },
+        rules:[
+          {string:'/Desayuno/g',rstring:'\nDESAYUNO'},
+          {string:'/Almuerzo/g',rstring:'\nALMUERZO'},
+          {string:'/Comida/g',rstring:'\nCENA'},
+          {string:'/Vianda/g',rstring:'🥔   Vianda'},
+          {string:'/Arroz blanco/g',rstring:'🍚   Arroz blanco'},
+          {string:'',rstring:''},
+          {string:'',rstring:''},
+          {string:'',rstring:''},
+          {string:'',rstring:''},
+          {string:'',rstring:''},
+          {string:'',rstring:''},
+      ],
       methods: {
         copyModText: function () {
           navigator.clipboard.writeText(this.modText);
