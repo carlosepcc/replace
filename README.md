@@ -1,2 +1,2 @@
 # replace
-Replacing strings
+Replacing strings. Mainly meals menu strings.
