@@ -31,50 +31,7 @@
   Vue.createApp({
     data() {
       return {
-        rawText: `Martes, 26/04/2022
-   Desayuno
-Mayonesa elaborada (20 g )$ 0
-Pan 50 g (50 g )$ 0
-Mermelada de pulpa de mango (80 g )$ 0
-   Almuerzo
-Sopa de pollo (200 g )$ 0
-Arroz blanco (180 g )$ 0
-Pollo asado (100 g )$ 0
-Boniato hervido (90 g )$ 0
-   Comida
-Pan 50 g (50 g )$ 0
-Salchicha (2 u )$ 0
-Arroz blanco (180 g )$ 0
-Potaje de chícharo (200 g )$ 0
-Miércoles, 27/04/2022
-   Desayuno
-Refresco de mermelada de mango (232 ml )$ 0
-Mayonesa elaborada (20 g )$ 0
-Pan 50 g (50 g )$ 0
-   Almuerzo
-Pan 50 g (50 g )$ 0
-Arroz blanco (180 g )$ 0
-Huevo hervido. (1 u )$ 0
-Potaje de frijoles negros (200 g )$ 0
-   Comida
-Sopa de pollo (200 g )$ 0
-Vianda hervida (90 g )$ 0
-Arroz blanco (180 g )$ 0
-Picadillo (80 g )$ 0
-Jueves, 28/04/2022
-   Desayuno
-Refresco de mermelada de mango (232 ml )$ 0
-Mayonesa elaborada (20 g )$ 0
-Pan 50 g (50 g )$ 0
-   Almuerzo
-Pan 50 g (50 g )$ 0
-Arroz blanco (180 g )$ 0
-Huevo hervido. (1 u )$ 0
-Potaje de frijoles negros (200 g )$ 0
-   Comida
-Vianda hervida (90 g )$ 0
-Pollo asado (100 g )$ 0
-Arroz congris (230 g )$ 0`,
+        rawText:'',
         rules:[
           {s:/\$ 0/g,r:''},
           {s:/\./g,r:''},
@@ -102,7 +59,7 @@ Arroz congris (230 g )$ 0`,
           {s:/Pan/g,r:'🍔   Pan '},
           {s:/Sopa/g,r:'🥣   Sopa'},
           {s:/Potaje/g,r:'🥣   Potaje'},
-          {s:/Boniato/g,r:'🥔   Boniato'},
+          {s:/Boniat/g,r:'🥔   Boniat'},
           {s:/Picadillo/g,r:'🧆   **Picadillo**'},
           {s:/\*\*Picadillo\*\* de masa de chorizo/g,r:'**Picadillo de masa de chorizo**'},
           {s:/Pollo/g,r:'🍗   **Pollo**'},
