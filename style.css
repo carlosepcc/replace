@@ -56,14 +56,14 @@ body {
     background: #fff;
     border: 3px solid teal;
     cursor: pointer;
-    box-shadow: -6px 6px 0 0 teal;
-    transform: translate(3px,-3px);
+    box-shadow: -4px 4px 0 0 teal;
+    transform: translate(1px,-1px);
   }
   #modTextContainer:active{
     background: #0002;
     cursor: pointer;
     box-shadow: -1px 1px 0 0 #0702;
-    transform: translate(-1px,1px);
+    transform: translate(0,0);
   }
   #modTextContainer pre{
     font-family: sans-serif;}
