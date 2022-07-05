@@ -1,76 +1,72 @@
-*{box-sizing: border-box;}
+* {
+  box-sizing: border-box;
+}
 body {
-    padding-bottom: 80%;
-    background: linear-gradient(rgb(103, 214, 113), rgb(27, 209, 170));
-font-family:sans-serif;
-  color: #333;
-  }
-  .card {
-    box-shadow: 0 0 4px 0 #0002;
-    padding: 16px;
-    margin: auto;
-    border-radius: 4px;
-  }
-  .app {
-    resize: both;
-    overflow: auto;
-    box-shadow: 1px 1px 6px 0 #0003 inset;
-    padding: 32px;
-    margin: 4px;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    background: white;
-    border: 4px solid #0b7;
-    border-top: 3px solid rgb(14, 68, 64);
-  }
-  .w100 {
-    width: 100%;
-  }
-  .p {
-    padding: 8px 16px;
-  }
-  .b0 {
-    border: 0;
-  }
-  #rawTextInput{
-    background: #fff;
-    margin-bottom: 20px;
-    font-family: sans-serif;
-    border: 3px solid rgb(206, 221, 221);
-    box-shadow: 1px 1px 8px 0 #0002 inset;
-  }
-  #modTextContainer {
-    padding: 32px;
-    width: 100%;
-    color: inherit;
-    border-radius: 4px;
-    border-top: 8px solid #999;
-    border: 0;
-    text-align: start;
-    overflow: auto;
-    background: #0501;
-    box-shadow: -2px 2px 0 0 #0702;
-    transition: .2s all;
-  }
-  #modTextContainer:hover{
-    background: #fff;
-    border: 3px solid teal;
-    cursor: pointer;
-    box-shadow: -2px 2px 0 0 teal;
-    transform: translate(1px,-1px);
-  }
-  #modTextContainer:active{
-    background: #0002;
-    cursor: pointer;
-    box-shadow: -1px 1px 0 0 #0702;
-    transform: translate(0,0);
-  }
-  #modTextContainer pre{
-    font-family: sans-serif;}
-  .app-title {
-    color: #fffe;
-    margin-left: 1em;
-    background: #0006;
-    padding: 8px 24px;
-    border-radius: 8px 8px 0 0;
-  }
+  background-color: rgb(103, 214, 113);
+  font-family: sans-serif;
+  color: #000d;
+  margin: 0;
+}
+
+.card {
+  box-shadow: 0 0 4px 0 #0002;
+  padding: 16px;
+  margin: auto;
+  border-radius: 4px;
+}
+.app {
+  resize: both;
+  overflow: auto;
+  box-shadow: 1px 1px 6px 0 #0003 inset;
+  padding: 32px;
+  border-radius: 8px;
+  margin: 8px;
+  background: white;
+  border: 4px solid #0b7;
+  border-top: 3px solid rgb(14, 68, 64);
+}
+.w100 {
+  width: 100%;
+}
+.p {
+  padding: 8px 16px;
+}
+.b0 {
+  border: 0;
+}
+#rawTextInput {
+  background: #fff;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  border: 3px solid rgb(206, 221, 221);
+  box-shadow: 1px 1px 8px 0 #0002 inset;
+}
+#modTextContainer {
+  padding: 32px;
+  width: 100%;
+  color: inherit;
+  border-radius: 4px;
+  border-top: 8px solid #999;
+  border: 0;
+  text-align: start;
+  overflow: auto;
+  background: #0501;
+  box-shadow: -2px 2px 0 0 #0702;
+  transition: 0.2s all;
+}
+#modTextContainer:hover {
+  background: #fff;
+  border: 3px solid teal;
+  cursor: pointer;
+  box-shadow: -2px 2px 0 0 teal;
+  transform: translate(1px, -1px);
+}
+#modTextContainer:active {
+  background: #0002;
+  cursor: pointer;
+  box-shadow: -1px 1px 0 0 #0702;
+  transform: translate(0, 0);
+}
+#modTextContainer pre {
+  font-family: sans-serif;
+}

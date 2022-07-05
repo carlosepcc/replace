@@ -1,136 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Replace</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <script src="https://unpkg.com/vue@3"></script>
-
-<div id="app" class="app">
-  <textarea
-        placeholder="Pegue el texto a formatear..."
-        id="rawTextInput"
-        class="w100 card"
-        v-model="rawText"
-        rows="12"
-        cols="40"
-      ></textarea>
-    Salida (toque para copiar el texto modificado)
-      <div
-        title="Click to copy modified text"
+    <main>
+      <div id="app" class="app">
+        <p>
+          <a href="https://alimentacion.uci.cu" target="_blank"
+            >Abrir alimentacion.uci.cu
+          </a>
+        </p>
+        <textarea
+          placeholder="Pegue el texto a formatear..."
+          id="rawTextInput"
+          class="w100 card"
+          v-model="rawText"
+          rows="12"
+          cols="40"
+        ></textarea>
+        <p>
+          Toque para copiar el texto modificado
+          <b style="float: right">{{message}}</b>
+        </p>
+        <div
+          title="Click to copy modified text"
           @click="copyModText"
-          id="modTextContainer">
+          id="modTextContainer"
+        >
           <pre v-html="modText"></pre>
+        </div>
+        <!-- <iframe src="https://alimentacion.uci.cu" title="SIGA"></iframe> -->
       </div>
-        <!--<iframe src="https://alimentacion.uci.cu" title="SIGA"></iframe>-->
-    </div>
+    </main>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+            rawText: "",
+            rules: [
+              { s: /\./g, r: "" }, //Elimina todos los periods
+              { s: /,/g, r: "   " }, //Elimina todas las comas
+              { s: /\s*\(\d.*\)\s*\$ 0/g, r: "" }, //Elimina todas las cadenas de cantidades del producto y precio Ej:  "(50 g )$ 0"
+              { s: / 50 g/g, r: "" }, // Elimina " 50 g" - Para la cadena "Pan 50 g"
+              { s: /Lunes/g, r: "**LUNES**" },
+              { s: /Martes/g, r: "**MARTES**" },
+              { s: /Miércoles/g, r: "**MIÉRCOLES**" },
+              { s: /Jueves/g, r: "**JUEVES**" },
+              { s: /Viernes/g, r: "**VIERNES**" },
+              { s: /Sábado/g, r: "**SÁBADO**" },
+              { s: /Domingo/g, r: "**DOMINGO**" },
 
-<script>
-  Vue.createApp({
-    data() {
-      return {
-        rawText:'',
-        rules:[
-          {s:/\./g,r:''}, //Elimina todos los periods
-          {s:/,/g,r:'   '}, //Elimina todas las comas
-          {s:/\s*\(\d.*\)\s*\$ 0/g,r:''}, //Elimina todas las cadenas de cantidades del producto y precio Ej:  "(50 g )$ 0"
-          {s:/ 50 g/g,r:''}, // Elimina " 50 g" - Para la cadena "Pan 50 g"
-          {s:/Lunes/g,r:'**LUNES**'},
-          {s:/Martes/g,r:'**MARTES**'},
-          {s:/Miércoles/g,r:'**MIÉRCOLES**'},
-          {s:/Jueves/g,r:'**JUEVES**'},
-          {s:/Viernes/g,r:'**VIERNES**'},
-          {s:/Sábado/g,r:'**SÁBADO**'},
-          {s:/Domingo/g,r:'**DOMINGO**'},
-          
-          {s:/\/\d+\n/g,r:''}, //Borrar el año /<dígitos>\n
-          {s:/\/07\//g,r:' de julio'},
-          {s:/\/08\//g,r:' de agosto'},
-          {s:/\/09\//g,r:' de septiembre'},
-          {s:/\/10\//g,r:' de octubre'},
-          {s:/\/11\//g,r:' de noviembre'},
-          {s:/\/12\//g,r:' de diciembre'},
-          {s:/\/01\//g,r:' de enero'},
-          {s:/\/02\//g,r:' de febrero'},
-          {s:/\/03\//g,r:' de marzo'},
-          {s:/\/04\//g,r:' de abril'},
-          {s:/\/05\//g,r:' de mayo'},
-          {s:/\/06\//g,r:' de junio'},
+              { s: /\/\d+\n/g, r: "\n" }, //Borrar el año /<dígitos>\n
+              { s: /\/07/g, r: " de julio" },
+              { s: /\/08/g, r: " de agosto" },
+              { s: /\/09/g, r: " de septiembre" },
+              { s: /\/10/g, r: " de octubre" },
+              { s: /\/11/g, r: " de noviembre" },
+              { s: /\/12/g, r: " de diciembre" },
+              { s: /\/01/g, r: " de enero" },
+              { s: /\/02/g, r: " de febrero" },
+              { s: /\/03/g, r: " de marzo" },
+              { s: /\/04/g, r: " de abril" },
+              { s: /\/05/g, r: " de mayo" },
+              { s: /\/06/g, r: " de junio" },
 
-          {s:/Desayuno/g,r:'\n**Desayuno**'},
-          {s:/Almuerzo/g,r:'\n**Almuerzo**'},
-          {s:/Comida/g,r:'\n**Cena**'},
-          {s:/Vianda/g,r:'🥔   Vianda'},
-          {s:/Arroz/g,r:'🍚   Arroz'},
-          {s:/🍚   Arroz congris/g,r:'🍛   Arroz congris'},
-          {s:/Huevo/g,r:'🥚   **Huevo**'},
-          {s:/\*\*Huevo\*\* hervido/g,r:'**Huevo hervido**'},
-          {s:/🥚   \*\*Huevo\*\* frito/g,r:'🍳   **Huevo frito**'},
-          {s:/Pan/g,r:'🍔   Pan '},
-          {s:/Sopa/g,r:'🥣   Sopa'},
-          {s:/Potaje/g,r:'🥣   Potaje'},
-          {s:/Caldosa/g,r:'🥘   Caldosa'},
-          {s:/Boniat/g,r:'🥔   Boniat'},
-          {s:/Picadillo/g,r:'🧆   **Picadillo**'},
-          {s:/\*\*Picadillo\*\* de masa de chorizo/g,r:'**Picadillo de masa de chorizo**'},
-          {s:/PBorrarollo/g,r:'🍗   **Pollo**'},
-          {s:/Aporreado de pollo/g,r:'🍗   **Aporreado de pollo**'},
-          {s:/\*\*Pollo\*\* asado/g,r:'**Pollo asado**'},
-          {s:/\*\*Pollo\*\* frito/g,r:'**Pollo frito**'},
-          {s:/Salchicha/g,r:'🌭   **Salchicha**'},
-          {s:/Perr/g,r:'🌭   Perr'},
-          {s:/Mermelada/g,r:'🍯   Mermelada'},
-          {s:/Refresco/g,r:'🥃   Refresco'},
-          {s:/Calabaza/g,r:'🎃   Calabaza'},
-          {s:/Chorizo/g,r:'🥩️   **Chorizo**'},
-          {s:/Ropa vieja/g,r:'🥩️   **Ropa vieja**'},
-          {s:/Mayonesa/g,r:'🧈   Mayonesa'},
-          {s:/Pasta/g,r:'🧈   Pasta'},
-          {s:/Palitroques/g,r:'🥖   Palitroques'},
-          {s:/Plátano/g,r:'🍌   Plátano'},
-          {s:/Fufú/g,r:'🍌   Fufú'},
-          {s:/Jamonada/g,r:'🥩️   **Jamonada**'},
-          {s:/Mortadella/g,r:'🥩️   **Mortadella**'},
-          {s:/Cerdo/g,r:'🥩️   **Cerdo**'},
-          {s:/\*\*Cerdo\*\* guisado/g,r:'**Cerdo guisado**'},
-          {s:/Hamburguesa/g,r:'🍘   **Hamburguesa**'},
-          {s:/Dulce/g,r:'🥐   Dulce'},
-          {s:/Melón/g,r:'🍉️   Melón'},
-          {s:/Mango/g,r:'🥭   Mango'},
-          {s:/Piña/g,r:'🍍   Piña'},
-          
-      ],
-      }
-    },
-  computed: {
-    modText() {
-      let modText = this.rawText;
-      this.rules.forEach(rule => {
-  modText = modText.replace(rule.s, rule.r);
-});
-
-
-modText = modText + "\n\nt.me/alimentacionuci";
-      return modText;
-    }
-  },
-    methods: {
-      copyModText: function () {
-        if (this.modText){navigator.clipboard.writeText(this.modText);
-          alert("Copiado:\n\n" + this.modText);
-          return true;}else{
-            alert("No se encuentra texto que copiar.\nDetalles: El texto modificado que intenta copiar es: " + this.modText);
-          return false;}
+              { s: /Desayuno/g, r: "\n**Desayuno**" },
+              { s: /Almuerzo/g, r: "\n**Almuerzo**" },
+              { s: /Comida/g, r: "\n**Cena**" },
+              { s: /Vianda/g, r: "🥔   Vianda" },
+              { s: /Arroz/g, r: "🍚   Arroz" },
+              { s: /🍚   Arroz congris/g, r: "🍛   Arroz congris" },
+              { s: /Huevo/g, r: "🥚   **Huevo**" },
+              { s: /\*\*Huevo\*\* hervido/g, r: "**Huevo hervido**" },
+              { s: /🥚   \*\*Huevo\*\* frito/g, r: "🍳   **Huevo frito**" },
+              { s: /Pan/g, r: "🍔   Pan " },
+              { s: /Sopa/g, r: "🥣   Sopa" },
+              { s: /Potaje/g, r: "🥣   Potaje" },
+              { s: /Caldosa/g, r: "🥘   Caldosa" },
+              { s: /Boniat/g, r: "🥔   Boniat" },
+              { s: /Picadillo/g, r: "🧆   **Picadillo**" },
+              {
+                s: /\*\*Picadillo\*\* de masa de chorizo/g,
+                r: "**Picadillo de masa de chorizo**",
+              },
+              { s: /PBorrarollo/g, r: "🍗   **Pollo**" },
+              { s: /Aporreado de pollo/g, r: "🍗   **Aporreado de pollo**" },
+              { s: /\*\*Pollo\*\* asado/g, r: "**Pollo asado**" },
+              { s: /\*\*Pollo\*\* frito/g, r: "**Pollo frito**" },
+              { s: /Salchicha/g, r: "🌭   **Salchicha**" },
+              { s: /Perr/g, r: "🌭   Perr" },
+              { s: /Mermelada/g, r: "🍯   Mermelada" },
+              { s: /Refresco/g, r: "🥃   Refresco" },
+              { s: /Calabaza/g, r: "🎃   Calabaza" },
+              { s: /Chorizo/g, r: "🥩️   **Chorizo**" },
+              { s: /Ropa vieja/g, r: "🥩️   **Ropa vieja**" },
+              { s: /Mayonesa/g, r: "🧈   Mayonesa" },
+              { s: /Pasta/g, r: "🧈   Pasta" },
+              { s: /Palitroques/g, r: "🥖   Palitroques" },
+              { s: /Plátano/g, r: "🍌   Plátano" },
+              { s: /Fufú/g, r: "🍌   Fufú" },
+              { s: /Jamonada/g, r: "🥩️   **Jamonada**" },
+              { s: /Jamón/g, r: "🥩️   **Jamón**" },
+              { s: /Mortadella/g, r: "🥩️   **Mortadella**" },
+              { s: /Cerdo/g, r: "🥩️   **Cerdo**" },
+              { s: /\*\*Cerdo\*\* guisado/g, r: "**Cerdo guisado**" },
+              { s: /Hamburguesa/g, r: "🍘   **Hamburguesa**" },
+              { s: /Dulce/g, r: "🥐   Dulce" },
+              { s: /Melón/g, r: "🍉️   Melón" },
+              { s: /Mango/g, r: "🥭   Mango" },
+              { s: /Piña/g, r: "🍍   Piña" },
+            ],
+          };
         },
-    }
-  }).mount('#app')
-</script>
+        computed: {
+          modText() {
+            let modText = this.rawText;
+            this.rules.forEach((rule) => {
+              modText = modText.replace(rule.s, rule.r);
+            });
 
-<a href="https://carlosepcc.github.io/vueapps/#alimentacion-app">Old version</a>
-</body>
+            modText = modText + "\n\nt.me/alimentacionuci";
+            return modText;
+          },
+        },
+        methods: {
+          copyModText: function () {
+            navigator.clipboard.writeText(this.modText);
+            this.message = "Copiado";
+            setTimeout(() => {
+              this.message = "";
+            }, 3000);
+            return true;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
 </html>
-
