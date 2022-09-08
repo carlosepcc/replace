@@ -8,7 +8,7 @@
 🥤   ```$5  ```   Refresco
 
 **Parque central**
-🥓   ```$5  `   Croqueta
+🥓   ```$5  ```   Croqueta
 
 **Piscina**
 🍔   ```$20 ```    Pan con  *
